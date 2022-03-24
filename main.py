@@ -1,5 +1,6 @@
+import glob
 import time
-
+import json
 import overpy
 import csv
 import pandas as pd
@@ -161,6 +162,15 @@ def order_csv():
 def rm_csv():
     pd.read_csv('way1.csv', usecols=['nodes', 'start', 'end']).to_csv('way2.csv', quoting=csv.QUOTE_NONE, index=False)
 
+def merge_JsonFiles():
+    reslut = []
+    for f in glob.glob("*.json"):
+        with open(f, "rb") as infile:
+            reslut.append(json.load(infile))
+    with open("merged_file.json", "wb") as outfile:
+        json.dump(reslut, outfile)
+
+
 if __name__ == '__main__':
     #get_way()
     #get_waysAnodes()
@@ -169,12 +179,4 @@ if __name__ == '__main__':
     #get_temp()
     #ways2res()
     #order_csv()
-    df = pd.read_csv('way1.csv')
-    #list1 = set(df['nodes'][2].to_list())
-    str1 = df['start'][0]
-    print(str1)
-
-
-    #print(df['nodes'][2][1])
-    #print(df['nodes'][2])
-
+    merge_JsonFiles()
