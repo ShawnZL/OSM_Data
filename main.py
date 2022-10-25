@@ -38,6 +38,7 @@ def node2jsonfile(fname,nodeset,number):
 def get_way():
     api = overpy.Overpass()
     # south west north east
+    # west > east 西半球 (西经) west < east 东半球 (东经)
     result = api.query("""way["route"="ferry"](0, 98, 27, 123.422);out;""")
     print(len(result.ways))
     print("Way1: ", result.ways[0])
